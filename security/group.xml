@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="activity_groups" model="ir.module.category">
+        <field name="name">Inspection</field>
+        <field name="sequence">302</field>
+        <field name="visible" eval="0"/>
+    </record>
+    <record id="admin_inspection" model="res.groups">
+        <field name="name">admin</field>
+        <field name="category_id" ref="activity_groups"/>
+    </record>
+    <record id="group_crm_lead_inspection" model="res.groups">
+        <field name="name">Crm User</field>
+        <field name="category_id" ref="activity_groups"/>
+    </record>
+</odoo>

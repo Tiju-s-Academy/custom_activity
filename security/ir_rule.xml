@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="rule_user_see_own_inspection" model="ir.rule">
+        <field name="name">Users: Can see only their own records</field>
+        <field name="model_id" ref="model_mail_activity"/> <!-- Adjust to the correct model -->
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="admin_see_all_inspection" model="ir.rule">
+        <field name="name">Admin: Can see all records</field>
+        <field name="model_id" ref="model_mail_activity"/> <!-- Adjust to the correct model -->
+        <field name="domain_force">[]</field>
+        <field name="groups" eval="[(4, ref('admin_inspection'))]"/>
+    </record>
+    <record id="crm_group_inspection" model="ir.rule">
+        <field name="name">Crm : Can see all records in Crm</field>
+        <field name="model_id" ref="model_mail_activity"/> <!-- Adjust to the correct model -->
+        <field name="domain_force">[('res_model','=','crm.lead')]</field>
+        <field name="groups" eval="[(4, ref('group_crm_lead_inspection'))]"/>
+    </record>
+</odoo>

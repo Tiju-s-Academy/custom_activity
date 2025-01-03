@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_all_activities_tree" model="ir.ui.view">
+        <field name="name">all.activities.tree</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="activity_type_id"/>
+                <field name="res_name" string="Record Name"/>
+                <field name="res_model" string="Model"/>
+                <field name="user_id" string="Assigned To"/>
+                <field name="date_deadline" string="Deadline"/>
+                <field name="summary" string="Summary"/>
+                <button name="action_view_activity_record" type="object" string="View" class="btn-primary"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_all_activities_form" model="ir.ui.view">
+        <field name="name">all.activities.form</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <form string="Activity">
+                <button name="action_view_activity_record" type="object" string="View" class="btn-primary"/>
+                <sheet>
+                    <group>
+                        <field name="activity_type_id" string="Activity Type"/>
+                        <field name="res_model" string="Related Model"/>
+                        <field name="res_id" string="Record ID"/>
+                        <field name="user_id" string="Assigned To"/>
+                        <field name="date_deadline" string="Deadline"/>
+                        <field name="summary" string="Summary"/>
+                        <field name="note" string="Description"/>
+                    </group>
+                    <group>
+                        <field name="state" string="State"/>
+                        <field name="create_date" string="Creation Date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="search_view_group_inherit" model="ir.ui.view">
+        <field name="name">all.activities.search</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_search"/>
+        <field name="arch" type="xml">
+        <xpath expr="//filter[@name='activittype']" position="after">
+             <filter string="Assigned To" name="assigned_to" context="{'group_by': 'user_id'}"/>
+        </xpath>
+        </field>
+    </record>
+    <record id="action_all_activities" model="ir.actions.act_window">
+        <field name="name">All Activities</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

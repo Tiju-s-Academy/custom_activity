@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="activity_root_menu" name="Inspection" web_icon="custom_activity,static/description/icon.png"/>
+    <menuitem id="menu_all_activities" name="All Activities" parent="activity_root_menu"
+              action="action_all_activities"/>
+</odoo>
