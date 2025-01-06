@@ -3,4 +3,5 @@
     <menuitem id="activity_root_menu" name="Inspection" web_icon="custom_activity,static/description/icon.png"/>
     <menuitem id="menu_all_activities" name="All Activities" parent="activity_root_menu"
               action="action_all_activities"/>
+<!--    <menuitem id="log_note_menu" name="All Log" parent="activity_root_menu" action="actions_activity_message"/>-->
 </odoo>

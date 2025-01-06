@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_activity_message_tree" model="ir.ui.view">
+        <field name="name">activity.message.tree</field>
+        <field name="model">mail.message</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="author_id"/>
+                <field name="date"/>
+                <field name="message_type"/>
+                <field name="subject"/>
+                <field name="model"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_activity_message_form" model="ir.ui.view">
+        <field name="name">activity.message.form</field>
+        <field name="model">mail.message</field>
+        <field name="arch" type="xml">
+            <form>
+                <button name="action_view_activity_message_record" type="object" string="Record View" class="btn-primary"/>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="author_id"/>
+                            <field name="date"/>
+                            <field name="subject"/>
+                        </group>
+                        <group>
+                             <field name="message_type"/>
+                            <field name="model"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="actions_activity_message" model="ir.actions.act_window">
+        <field name="name">Logs</field>
+        <field name="res_model">mail.message</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+

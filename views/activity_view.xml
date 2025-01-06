@@ -10,6 +10,7 @@
                 <field name="res_model" string="Model"/>
                 <field name="user_id" string="Assigned To"/>
                 <field name="date_deadline" string="Deadline"/>
+                <field name="department_id" string="Department"/>
                 <field name="summary" string="Summary"/>
                 <button name="action_view_activity_record" type="object" string="View" class="btn-primary"/>
             </tree>
@@ -46,6 +47,8 @@
         <field name="arch" type="xml">
         <xpath expr="//filter[@name='activittype']" position="after">
              <filter string="Assigned To" name="assigned_to" context="{'group_by': 'user_id'}"/>
+             <filter string="Department" name="group_by_department" context="{'group_by': 'department_id'}"/>
+             <filter string="Today Activities" name="activities_today" domain="[('date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
         </xpath>
         </field>
     </record>
