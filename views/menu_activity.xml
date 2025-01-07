@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <menuitem id="activity_root_menu" name="Inspection" web_icon="custom_activity,static/description/icon.png"/>
-    <menuitem id="menu_all_activities" name="All Activities" parent="activity_root_menu"
-              action="action_all_activities"/>
-<!--    <menuitem id="log_note_menu" name="All Log" parent="activity_root_menu" action="actions_activity_message"/>-->
+    <menuitem id="menu_all_activities" name="Pending Activities" parent="activity_root_menu"
+              action="action_all_activities" sequence="1"/>
+    <menuitem id="complete_log_menu" name="Completed Activity" parent="activity_root_menu" action="actions_complete_log" sequence="2"/>
+    <menuitem id="log_note_menu" name="Log" parent="activity_root_menu" action="actions_activity_message" sequence="3"/>
 </odoo>
