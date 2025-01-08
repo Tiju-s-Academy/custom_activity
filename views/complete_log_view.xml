@@ -4,7 +4,7 @@
         <field name="name">activity.message.tree</field>
         <field name="model">mail.message</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create="0">
                 <field name="author_id"/>
                 <field name="date"/>
                 <field name="message_type"/>
@@ -13,10 +13,23 @@
             </tree>
         </field>
     </record>
+    <record id="search_view_message_inherit" model="ir.ui.view">
+        <field name="name">all.message.search</field>
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="mail.view_message_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+            <!-- Add filter for department -->
+                <filter string="By Department" name="group_by_department" context="{'group_by': 'department_id'}"/>
+            <separator/>
+        </xpath>
+        </field>
+    </record>
     <record id="actions_complete_log" model="ir.actions.act_window">
-        <field name="name">Logs</field>
+        <field name="name">All Logs</field>
         <field name="res_model">mail.message</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('message_type', '=', 'notification')]</field>
+        <field name="domain">[('message_type', '=', 'notification'),('author_id.name', '!=', 'OdooBot')]</field>
     </record>
 </odoo>
+

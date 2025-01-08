@@ -1,4 +1,4 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_inspection_admin,inspection admin,model_mail_activity,admin_inspection,1,0,0,0
-access_inspection_user,inspection user,model_mail_activity,base.group_user,1,0,0,0
-access_inspection_crm_user,inspection crm user,model_mail_activity,group_crm_lead_inspection,1,0,0,0
+access_inspection_admin,inspection admin,model_mail_activity,admin_inspection,1,1,1,1
+access_inspection_user,inspection user,model_mail_activity,base.group_user,1,1,1,1
+access_inspection_crm_user,inspection crm user,model_mail_activity,group_crm_lead_inspection,1,1,1,1

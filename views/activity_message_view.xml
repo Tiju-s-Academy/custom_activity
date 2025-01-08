@@ -4,7 +4,7 @@
         <field name="name">activity.message.tree</field>
         <field name="model">mail.message</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create="false">
                 <field name="author_id"/>
                 <field name="date"/>
                 <field name="message_type"/>
@@ -13,15 +13,101 @@
             </tree>
         </field>
     </record>
-
+    <record id="view_mail_message_graph" model="ir.ui.view">
+        <field name="name">mail.message.graph</field>
+        <field name="model">mail.message</field>
+        <field name="arch" type="xml">
+            <graph string="Messages" type="bar">
+                <field name="author_id"/>
+                <field name="date"/>
+            </graph>
+        </field>
+    </record>
+    <record id="view_activity_message_form" model="ir.ui.view">
+        <field name="name">view.activity.message.form</field>
+        <field name="model">mail.message</field>
+        <field name="arch" type="xml">
+            <form string="Message" duplicate="0" create="false">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_document" type="object" class="oe_link" icon="fa-file-text-o"
+                                invisible="not model or res_id == 0">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Open Document</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="subject" readonly="1"/>
+                            <field name="date" readonly="1"/>
+                            <field name="email_from" readonly="1"/>
+                            <field name="author_id" readonly="1"/>
+                            <field name="message_type" readonly="1"/>
+                            <field name="subtype_id" readonly="1"/>
+                            <field name="is_internal" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="model" readonly="1"/>
+                            <field name="res_id" invisible="1"/>
+                            <field name="record_name" readonly="1"/>
+                            <field name="parent_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Body" name="body">
+                            <field name="body" options="{'style-inline': true}" readonly="1"/>
+                        </page>
+                        <page string="Gateway" name="gateway">
+                            <group>
+                                <group>
+                                    <field name="reply_to" readonly="1"/>
+                                    <field name="reply_to_force_new" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="message_id" readonly="1"/>
+                                    <field name="mail_server_id" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Recipients" name="recipients">
+                            <group>
+                                <group>
+                                    <field name="partner_ids" widget="many2many_tags" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="notified_partner_ids" widget="many2many_tags" readonly="1"/>
+                                    <field name="starred_partner_ids" widget="many2many_tags" readonly="1"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="notification_ids">
+                                    <tree>
+                                        <field name="res_partner_id" readonly="1"/>
+                                        <field name="is_read" readonly="1"/>
+                                        <field name="notification_type" readonly="1"/>
+                                        <field name="notification_status" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Tracking" name="page_tracking">
+                            <field name="tracking_value_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
     <record id="actions_activity_message" model="ir.actions.act_window">
         <field name="name">Logs</field>
         <field name="res_model">mail.message</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph</field>
         <field name="domain">[
             ('message_type', '=', 'comment'),
             ('author_id.name', '!=', 'OdooBot')
-        ]</field>
+            ]
+        </field>
     </record>
 </odoo>
 

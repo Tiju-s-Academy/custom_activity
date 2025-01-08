@@ -1,7 +1,20 @@
-from odoo import fields,models
+from odoo import fields,models,api
 
 class MailMessageInherit(models.Model):
     _inherit = 'mail.message'
+
+    department_id = fields.Many2one(
+        'hr.department',
+        string="Department",
+        compute="_compute_department_id",
+        store=True
+    )
+
+    @api.depends('author_id')
+    def _compute_department_id(self):
+        for activity in self:
+            employee = self.env['hr.employee'].search([('user_id', '=', activity.author_id.id)], limit=1)
+            activity.department_id = employee.department_id if employee else False
 
     manifest_name = fields.Char(string='App Name', compute='_compute_manifest_name')
 
